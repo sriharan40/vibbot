@@ -12,6 +12,8 @@ const bot    = new ViberBot({
     avatar: "http://viber.com/avatar.jpg" // It is recommended to be 720x720, and no more than 100kb.
 });
 
+console.log("Viber working");
+
 // Perfect! Now here's the key part:
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     // Echo's back the message to the client. Your bot logic should sit here.
@@ -25,8 +27,8 @@ const port  = process.env.PORT || 8081;
 // Viber will push messages sent to this URL. Web server should be internet-facing.
 const webhookUrl = process.env.WEBHOOK_URL;
 
-//const httpsOptions = { key: ... , cert: ... , ca: ... }; // Trusted SSL certification (not self-signed).
-https.createServer(bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
+const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
+https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
 
 /* console.log("Body:"+JSON.stringify(event));
 	
