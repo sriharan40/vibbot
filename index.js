@@ -4,7 +4,7 @@ const ViberBot  = require('viber-bot').Bot;
 
 const BotEvents = require('viber-bot').Events;
 
-exports.handler = function(event, context, callback) {
+//exports.handler = function(event, context, callback) {
 
 const bot    = new ViberBot({
     authToken: process.env.auth_token,
@@ -280,4 +280,4 @@ else
       .get();
 }
 } */	
-};
+// };
