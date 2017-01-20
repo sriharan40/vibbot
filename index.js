@@ -4,7 +4,9 @@ const ViberBot  = require('viber-bot').Bot;
 
 const BotEvents = require('viber-bot').Events;
 
-//var app = express();
+var express = require('express');
+
+var app = express();
 
 //exports.handler = function(event, context, callback) {
 
@@ -21,9 +23,9 @@ const port  = process.env.PORT || 8080;
 // Viber will push messages sent to this URL. Web server should be internet-facing.
 const webhookUrl = process.env.WEBHOOK_URL;
 
-//app.use('/webhook', bot.middleware());
+app.use('/webhook', bot.middleware());
 
-//app.post('/webhook', function(req, response) {
+app.post('/webhook', function(req, response) {
 
 console.log("Webhook"+webhookUrl);
 
@@ -35,13 +37,15 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     response.send("Welcome to viber bot in Heroku");
 });
 
-const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
-https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
+//const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
+//https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
+//});
+
 });
 
-//app.listen((port), () => { 
-//	bot.setWebhook(webhookUrl);
-//});	
+app.listen((port), () => { 
+	bot.setWebhook(webhookUrl);
+});	
 
 //const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
 //https.createServer(httpsOptions, ).listen(port, () => ;
