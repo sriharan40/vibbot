@@ -15,7 +15,7 @@ const bot    = new ViberBot({
 // Perfect! Now here's the key part:
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     // Echo's back the message to the client. Your bot logic should sit here.
-    response.send(message);
+    response.send("Welcome to viber bot in Heroku");
 });
 
 // Wasn't that easy? Let's create HTTPS server and set the webhook:
