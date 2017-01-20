@@ -25,16 +25,20 @@ const webhookUrl = process.env.WEBHOOK_URL;
 
 app.use('/webhook', bot.middleware());
 
-app.post('/webhook', function(req,res){
+app.post('/webhook', function(){
 
 console.log("Webhook"+webhookUrl);
 
 //bot.setWebhook(webhookUrl).then(() => console.log("Viber working")).catch(err => console.log(err));
-
+bot.onSubscribe(response => bot.getUserDetails(response.userProfile)
+        .then(userDetails => console.log(userDetails)));
+		
 // Perfect! Now here's the key part:
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 	// Echo's back the message to the client. Your bot logic should sit here.
-    response.send("Welcome to viber bot in Heroku");
+const TextMessage = require('viber-bot').Message.Text;
+bot.sendMessage(userProfile, new TextMessage("Thanks for shopping with us"));
+	response.send("Welcome to viber bot in Heroku");
 });
 
 //const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
