@@ -23,7 +23,7 @@ const webhookUrl = process.env.WEBHOOK_URL;
 
 app.use("/webhook", bot.middleware());
 
-http.createServer(bot.middleware(){
+http.createServer(function(bot.middleware()) {
 
 console.log("Webhook"+webhookUrl);
 
