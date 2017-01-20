@@ -19,14 +19,14 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 });
 
 // Wasn't that easy? Let's create HTTPS server and set the webhook:
-const http = require('http');
+const https = require('https');
 const port  = process.env.PORT || 8081;
 
 // Viber will push messages sent to this URL. Web server should be internet-facing.
 const webhookUrl = process.env.WEBHOOK_URL;
 
 //const httpsOptions = { key: ... , cert: ... , ca: ... }; // Trusted SSL certification (not self-signed).
-http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
+https.createServer(bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
 
 /* console.log("Body:"+JSON.stringify(event));
 	
