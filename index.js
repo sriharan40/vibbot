@@ -4,6 +4,8 @@ const ViberBot  = require('viber-bot').Bot;
 
 const BotEvents = require('viber-bot').Events;
 
+var app = express();
+
 //exports.handler = function(event, context, callback) {
 
 const bot    = new ViberBot({
@@ -12,26 +14,31 @@ const bot    = new ViberBot({
     avatar: "http://viber.com/avatar.jpg" // It is recommended to be 720x720, and no more than 100kb.
 });
 
+// Wasn't that easy? Let's create HTTPS server and set the webhook:
+const http = require('http');
+const port  = process.env.PORT || 8080;
+
 // Viber will push messages sent to this URL. Web server should be internet-facing.
 const webhookUrl = process.env.WEBHOOK_URL;
 
+app.use("/webhook", bot.middleware());
+
+http.createServer(bot.middleware(){
+
 console.log("Webhook"+webhookUrl);
 
-bot.setWebhook(webhookUrl).then(() => console.log("Viber working")).catch(err => console.log(err));
+//bot.setWebhook(webhookUrl).then(() => console.log("Viber working")).catch(err => console.log(err));
 
 // Perfect! Now here's the key part:
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
-
 	// Echo's back the message to the client. Your bot logic should sit here.
     response.send("Welcome to viber bot in Heroku");
 });
 
-// Wasn't that easy? Let's create HTTPS server and set the webhook:
-const https = require('https');
-const port  = process.env.PORT || 8080;
+}).listen((process.env.PORT), () => bot.setWebhook(webhookUrl)));	
 
-const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
-https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
+//const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
+//https.createServer(httpsOptions, ).listen(port, () => ;
 
 /* console.log("Body:"+JSON.stringify(event));
 	
