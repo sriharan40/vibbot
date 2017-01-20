@@ -21,7 +21,7 @@ console.log("Viber working");
 
 // Wasn't that easy? Let's create HTTPS server and set the webhook:
 const https = require('https');
-const port  = process.env.PORT || 8081;
+const port  = process.env.PORT || 8080;
 
 // Viber will push messages sent to this URL. Web server should be internet-facing.
 const webhookUrl = process.env.WEBHOOK_URL;
