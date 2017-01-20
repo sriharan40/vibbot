@@ -25,7 +25,7 @@ const webhookUrl = process.env.WEBHOOK_URL;
 
 app.use('/webhook', bot.middleware());
 
-app.post('/webhook', function(req, response) {
+app.post('/webhook', bot.middleware(){
 
 console.log("Webhook"+webhookUrl);
 
