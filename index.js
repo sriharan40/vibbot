@@ -21,9 +21,9 @@ const port  = process.env.PORT || 8080;
 // Viber will push messages sent to this URL. Web server should be internet-facing.
 const webhookUrl = process.env.WEBHOOK_URL;
 
-app.use("/webhook", bot.middleware());
+app.use('/webhook', bot.middleware());
 
-http.createServer(function(bot.middleware()) {
+app.post('/webhook', function(req, response) {
 
 console.log("Webhook"+webhookUrl);
 
@@ -35,7 +35,11 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     response.send("Welcome to viber bot in Heroku");
 });
 
-}).listen((process.env.PORT), () => bot.setWebhook(webhookUrl)));	
+});
+
+app.listen((port), () => { 
+	bot.setWebhook(webhookUrl);
+});	
 
 //const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
 //https.createServer(httpsOptions, ).listen(port, () => ;
