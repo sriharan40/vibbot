@@ -12,11 +12,10 @@ const bot    = new ViberBot({
     avatar: "http://viber.com/avatar.jpg" // It is recommended to be 720x720, and no more than 100kb.
 });
 
-console.log("Viber working");
-
 // Perfect! Now here's the key part:
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
-    // Echo's back the message to the client. Your bot logic should sit here.
+console.log("Viber working");
+	// Echo's back the message to the client. Your bot logic should sit here.
     response.send("Welcome to viber bot in Heroku");
 });
 
