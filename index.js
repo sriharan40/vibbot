@@ -25,7 +25,7 @@ const webhookUrl = process.env.WEBHOOK_URL;
 
 app.use('/webhook', bot.middleware());
 
-app.post('/webhook', function(){
+//app.post('/webhook', function(){
 
 console.log("Webhook"+webhookUrl);
 
@@ -41,15 +41,15 @@ bot.sendMessage(userProfile, new TextMessage("Thanks for shopping with us"));
 	response.send("Welcome to viber bot in Heroku");
 });
 
-//const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
-//https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
+const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
+https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
 //});
 
-});
+//});
 
-app.listen((port), () => { 
-	bot.setWebhook(webhookUrl);
-});	
+//app.listen((port), () => { 
+//	bot.setWebhook(webhookUrl);
+//});	
 
 //const httpsOptions = { key: "" , cert: "" , ca: "" }; // Trusted SSL certification (not self-signed).
 //https.createServer(httpsOptions, ).listen(port, () => ;
